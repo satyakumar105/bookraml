@@ -1,0 +1,54 @@
+#%RAML 1.0
+title: BookAPI
+types:
+  BookType:
+    description: |
+      Book custom object 
+    example:
+      strict: true
+      value:
+        BookID: 100
+        BookTitile: Tutorial
+        BookAuthor:
+          - satya
+          - kumar
+        BookPrice: 500
+    properties:
+      BookID:
+        example: 1
+        type: number
+        format: int
+      BookTitile:
+        example: Example
+        type: string
+      BookAuthor:
+        items:
+          example: Example
+          type: string
+      BookPrice?:
+        example: 1
+        type: number
+        format: int
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/7e381f03-f772-41b5-8522-5952f7554ef0
+description: This is book api for Book management
+mediaType:
+  - application/json
+version: 1.0.0
+protocols:
+  - HTTP
+/book:
+  get:
+    displayName: Get a Book Object
+    queryParameters:
+      bookid:
+        example: 1
+        type: number
+        format: int
+    responses:
+      "200":
+        body:
+          type: BookType
+  post:
+    displayName: Add a new book
+    body:
+      type: BookType
